@@ -1,0 +1,14 @@
+<div id="<%= dom_id mod %>">
+  <p>
+    <strong>Name:</strong>
+    <%= mod.name %>
+  </p>
+  <p>
+    <strong>Description:</strong>
+    <%= mod.description %>
+  </p>
+  <p>
+    <strong>Zip:</strong>
+    <%= link_to mod.zip.filename, url_for(mod.zip), class: "text-blue-500" %>
+  </p>
+</div>
