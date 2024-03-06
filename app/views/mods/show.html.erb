@@ -1,10 +1,12 @@
 <p style="color: green"><%= notice %></p>
-
-<%= render @mod %>
-
-<div>
-  <%= link_to "Edit this mod", edit_mod_path(@mod) %> |
-  <%= link_to "Back to mods", mods_path %>
-
-  <%= button_to "Destroy this mod", @mod, method: :delete %>
+<h1 class="text-3xl font-bold"><%= link_to "Mods", mods_path %></h1>
+<div id="mods" class="grid grid-cols-3 gap-4 mt-10">
+  <div class="col-start-1"></div>
+  <%= render @mod %>
+  <div class="col-start-1"></div>
+  <div>
+    <%= link_to "Edit this mod", edit_mod_path(@mod) %> |
+    <%= link_to "Back to mods", mods_path %>
+    <%= button_to "Destroy this mod", @mod, method: :delete %>
+  </div>
 </div>

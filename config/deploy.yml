@@ -24,12 +24,41 @@ env:
   secret:
     - RAILS_MASTER_KEY
 
+accessories:
+  mc:
+    roles:
+      - web
+    image: itzg/minecraft-server
+    options:
+      publish:
+        - "25565:25565"
+    volumes:
+      - modpacks:/modpacks
+      - data:/data
+    env:
+      TYPE: FORGE
+      VERSION: "1.20.1"
+      FORGE_VERSION: "47.2.0"
+      EULA: "TRUE"
+      MEMORY: "4G"
+      MODE: "survival"
+      MOTD: "A Minecraft Server"
+      PVP: "true"
+      OPS: "deaniocom"
+
+    labels:
+      traefik.http.routers.minecraft.entrypoints: web
+      traefik.http.routers.minecraft.rule: Host(`minecraft.deanout.com`)
+
 traefik:
   options:
     publish:
       - "443:443"
+      - "25565:25565"
   args:
     entryPoints.websecure.address: ":443"
+    entryPoints.web.address: ":25565"
 
 volumes:
   - "storage:/rails/storage"
+  - data:/data

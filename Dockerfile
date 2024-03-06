@@ -70,7 +70,6 @@ USER rails:rails
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
-# Need to store the activve storage zips so they can be moved to the mods directory
 VOLUME /rails/storage
 
 # Start the server by default, this can be overwritten at runtime
