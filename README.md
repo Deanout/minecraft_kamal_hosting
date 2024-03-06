@@ -21,6 +21,9 @@ Steps to configure Minecraft Server:
 - [ ] What if the user doesn't know how to make an ssh key?
 
 
+# Thoughts
+Create a startup script that prompts for IP, name for the service and the game, etc... And then it modifies the files accordingly.
+
 # TODO
 1. Script needs to be a service
 2. Need to deploy the script to the server in the pre-connect hook

@@ -6,7 +6,10 @@ Rails.application.routes.draw do
     namespace :v1 do
       get 'download_latest_mod', to: 'dashboard#download_latest_mod'
       get 'check_current_version', to: 'dashboard#check_current_version'
-      get 'test', to: 'dashboard#test_stuff'
+      # Test endpoint now takes a mod id as a parameter
+      get 'tests', to: 'dashboard#test_latest', as: :test_latest
+      get 'test/mod/:id', to: 'dashboard#test_mod', as: :test_mod
+
     end
   end
 

@@ -1,0 +1,9 @@
+[Unit]
+Description=Check Flag File Service
+
+[Service]
+Type=oneshot
+ExecStart=/test/file_checker.sh
+
+[Install]
+WantedBy=multi-user.target

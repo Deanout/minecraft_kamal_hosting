@@ -1,5 +1,6 @@
 # Name of your application. Used to uniquely configure containers.
-service: deanout
+# service: deanout
+service: deployer
 
 # Name of the container image.
 image: deanin/linktree_demo
@@ -25,7 +26,7 @@ env:
     - RAILS_MASTER_KEY
 
 accessories:
-  mc:
+  game:
     roles:
       - web
     image: itzg/minecraft-server

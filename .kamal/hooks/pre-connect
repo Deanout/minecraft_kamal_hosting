@@ -11,12 +11,22 @@
 # KAMAL_DESTINATION (if set)
 # KAMAL_RUNTIME
 
-# echo "$KAMAL_PERFORMER deployed $KAMAL_VERSION to $KAMAL_DESTINATION in $KAMAL_RUNTIME seconds"
+echo "$KAMAL_PERFORMER deployed $KAMAL_VERSION to $KAMAL_DESTINATION in $KAMAL_RUNTIME seconds"
 
 echo "THE PRE CONNECT HOOK IS RUNNING"
 
-ssh root@154.53.46.232 'chmod +x listener.sh'
-ssh root@154.53.46.232 './listener.sh'
+# Moving Files onto the server section
+scp scripts/file_checker/file_checker.sh root@$KAMAL_HOSTS:/test
+scp scripts/file_checker/file_checker.service root@$KAMAL_HOSTS:/etc/systemd/system/
+scp scripts/file_checker/file_checker.timer root@$KAMAL_HOSTS:/etc/systemd/system/
+
+# Make the script runnable
+ssh root@$KAMAL_HOSTS 'chmod +x /test/file_checker.sh'
+
+# Start the service or reload the systemctl
+ssh root@$KAMAL_HOSTS 'systemctl daemon-reload'
+ssh root@$KAMAL_HOSTS 'systemctl enable file_checker.timer'
+ssh root@$KAMAL_HOSTS 'systemctl start file_checker.timer'
 
 # Return exit code 0 to prevent kamal from not running the command?
 exit 0

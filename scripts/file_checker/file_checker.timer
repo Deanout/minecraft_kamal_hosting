@@ -1,0 +1,9 @@
+[Unit]
+Description=Runs file_checker.service every minute
+
+[Timer]
+OnCalendar=*:0/1
+Unit=file_checker.service
+
+[Install]
+WantedBy=timers.target
