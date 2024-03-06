@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get 'download_latest_mod', to: 'dashboard#download_latest_mod'
       get 'check_current_version', to: 'dashboard#check_current_version'
+      get 'test', to: 'dashboard#test_stuff'
     end
   end
 

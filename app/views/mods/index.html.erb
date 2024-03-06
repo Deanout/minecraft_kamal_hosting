@@ -1,14 +1,12 @@
 <p style="color: green"><%= notice %></p>
-
-<h1>Mods</h1>
-
-<div id="mods">
+<h1 class="text-3xl font-bold">Mods</h1>
+<div id="mods" class="grid grid-cols-3 gap-4">
   <% @mods.each do |mod| %>
-    <%= render mod %>
-    <p>
-      <%= link_to "Show this mod", mod %>
-    </p>
+    <div class="col-start-1"></div>
+    <div class="container">
+      <%= render mod %>
+    </div>
+    <div class="col-start-1"></div>
   <% end %>
 </div>
-
 <%= link_to "New mod", new_mod_path %>

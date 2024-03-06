@@ -1,14 +1,16 @@
-<div id="<%= dom_id mod %>">
-  <p>
-    <strong>Name:</strong>
-    <%= mod.name %>
-  </p>
-  <p>
-    <strong>Description:</strong>
-    <%= mod.description %>
-  </p>
-  <p>
-    <strong>Zip:</strong>
-    <%= link_to mod.zip.filename, url_for(mod.zip), class: "text-blue-500" %>
-  </p>
+<div id="<%= dom_id mod %>" class="max-w-sm rounded overflow-hidden shadow-lg">
+  <img class="w-full" src="/img/card-top.jpg" alt="Sunset in the mountains">
+  <div class="px-6 py-4">
+    <div class="font-bold text-xl mb-2"><%= mod.name %></div>
+    <p class="text-gray-700 text-base">
+      <%= mod.description %>
+    </p>
+  </div>
+  <div class="px-6 pt-4 pb-2">
+    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><%= link_to mod.zip.filename, url_for(mod.zip), class: "text-blue-500" if mod.zip.attached? %>
+    </span>
+    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+      <%= link_to "View Modpack", mod, class: "text-blue-500" %>
+    </span>
+  </div>
 </div>
