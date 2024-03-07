@@ -15,10 +15,7 @@ class Api::V1::DashboardController < ApplicationController
     # Get the latest mod with an attachment
     mod = Mod.find(params[:id])
     extract_zip_file_to_data_mods(mod)
-    create_pending_restart_flag_file
-
-    extract_zip_file_to_data_mods(mod)
-    create_pending_restart_flag_file
+    create_command_execute_file("", "pending_restart")
 
     # Get the mod's zip file attachment
     respond_to do |format|
@@ -31,7 +28,7 @@ class Api::V1::DashboardController < ApplicationController
     mod = Mod.joins(:zip_attachment).order('created_at DESC').first
 
     extract_zip_file_to_data_mods(mod)
-    create_pending_restart_flag_file
+    create_command_execute_file("", "pending_restart")
 
     render json: { message: "Tested latest mod" }
 
@@ -39,7 +36,12 @@ class Api::V1::DashboardController < ApplicationController
       format.html { redirect_to mod, notice: 'Latest mod was successfully tested.' }
       format.json { render json: { message: "Tested latest mod" } }
     end
+  end
 
+  def command_test
+    command_to_run = '/title @a title "AdMiN AbUsE"'
+    file_name = "command_executor"
+    create_command_execute_file(command_to_run, file_name)
   end
 
   private
@@ -68,14 +70,13 @@ class Api::V1::DashboardController < ApplicationController
     end
 
   end
-
-  def create_pending_restart_flag_file
+  def create_command_execute_file(command_to_run, file_name)
     # Create the flag file
     if Rails.env.development?
       data_directory = Rails.root.join('data')
-      File.open("#{data_directory}/pending_restart", 'w') { |file| file.write('Hello, world!') }
+      File.write("#{data_directory}/#{file_name}", command_to_run)
     else
-      File.open('/data/pending_restart', 'w') { |file| file.write('Hello, world!') }
+      File.write("/data/#{file_name}", command_to_run)
     end
   end
 end

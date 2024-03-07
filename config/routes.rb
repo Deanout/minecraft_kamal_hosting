@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       # Test endpoint now takes a mod id as a parameter
       get 'tests', to: 'dashboard#test_latest', as: :test_latest
       get 'test/mod/:id', to: 'dashboard#test_mod', as: :test_mod
-
+      get 'command_test', to: 'dashboard#command_test'
     end
   end
 

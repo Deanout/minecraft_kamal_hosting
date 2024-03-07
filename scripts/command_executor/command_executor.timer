@@ -1,0 +1,9 @@
+[Unit]
+Description=Runs command_executor.service every 5 seconds
+
+[Timer]
+OnCalendar=*:*:0,15,30,45
+Unit=command_executor.service
+
+[Install]
+WantedBy=timers.target

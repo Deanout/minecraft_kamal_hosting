@@ -20,6 +20,9 @@ Steps to configure Minecraft Server:
 - [ ] What if I upload a file that is a zip but not a mod folder
 - [ ] What if the user doesn't know how to make an ssh key?
 
+# Cool Ideas
+- Forge/Fabric/Whatever Mod that we deploy alongside modded servers to assist with managing the server?
+- Discord bot integration with the server management
 
 # Thoughts
 Create a startup script that prompts for IP, name for the service and the game, etc... And then it modifies the files accordingly.
