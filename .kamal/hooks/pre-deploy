@@ -1,0 +1,23 @@
+#!/bin/sh
+# A sample pre-deploy hook
+#
+# Checks the Github status of the build, waiting for a pending build to complete for up to 720 seconds.
+#
+# Fails unless the combined status is "success"
+#
+# These environment variables are available:
+# KAMAL_RECORDED_AT
+# KAMAL_PERFORMER
+# KAMAL_VERSION
+# KAMAL_HOSTS
+# KAMAL_COMMAND
+# KAMAL_SUBCOMMAND
+# KAMAL_ROLE (if set)
+# KAMAL_DESTINATION (if set)
+
+
+echo "RUNNING PRE-DEPLOY HOOK"
+# Create the docker network if it doesn't exist
+ssh root@$KAMAL_HOSTS 'docker network inspect private > /dev/null 2>&1 || docker network create -d bridge private'
+
+exit 0

@@ -3,13 +3,16 @@
 service: deployer
 
 # Name of the container image.
-image: deanin/linktree_demo
+image: deanin/minecraft
 
 # Deploy to these servers.
 servers:
   web:
     hosts:
       - 154.53.46.232
+    options:
+      network: 
+        - "private"
     labels:
       traefik.http.routers.deanout_secure.entrypoints: websecure
       traefik.http.routers.deanout_secure.rule: Host(`deanout.com`)
@@ -33,19 +36,26 @@ accessories:
     options:
       publish:
         - "25565:25565"
+      network:
+        - "private"
     volumes:
       - modpacks:/modpacks
       - data:/data
+    # Need to do a `kamal env push` to update these on the server.
     env:
       TYPE: FORGE
       VERSION: "1.20.1"
       FORGE_VERSION: "47.2.0"
       EULA: "TRUE"
-      MEMORY: "4G"
+      MEMORY: "8G"
       MODE: "survival"
       MOTD: "A Minecraft Server"
       PVP: "true"
       OPS: "deaniocom"
+      ENABLE_RCON: "true"
+      RCON_PASSWORD: "password123"
+      RCON_PORT: "25585"
+      BROADCAST_RCON_TO_OPS: "true"
 
     labels:
       traefik.http.routers.minecraft.entrypoints: web
@@ -55,6 +65,8 @@ traefik:
   options:
     publish:
       - "443:443"
+    network: 
+      - "private"
   args:
     entryPoints.websecure.address: ":443"
 
