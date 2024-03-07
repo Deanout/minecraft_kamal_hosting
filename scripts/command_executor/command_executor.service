@@ -1,0 +1,9 @@
+[Unit]
+Description=Executes Commands on the Accessory Service
+
+[Service]
+Type=oneshot
+ExecStart=/test/command_executor.sh
+
+[Install]
+WantedBy=multi-user.target

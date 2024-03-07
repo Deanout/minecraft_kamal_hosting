@@ -15,18 +15,33 @@ echo "$KAMAL_PERFORMER deployed $KAMAL_VERSION to $KAMAL_DESTINATION in $KAMAL_R
 
 echo "THE PRE CONNECT HOOK IS RUNNING"
 
+# Make the test direcctory if it doesn't exit yet.
+ssh root@$KAMAL_HOSTS 'mkdir -p /test'
+
 # Moving Files onto the server section
 scp scripts/file_checker/file_checker.sh root@$KAMAL_HOSTS:/test
 scp scripts/file_checker/file_checker.service root@$KAMAL_HOSTS:/etc/systemd/system/
 scp scripts/file_checker/file_checker.timer root@$KAMAL_HOSTS:/etc/systemd/system/
 
+scp scripts/command_executor/command_executor.sh root@$KAMAL_HOSTS:/test
+scp scripts/command_executor/command_executor.service root@$KAMAL_HOSTS:/etc/systemd/system/
+scp scripts/command_executor/command_executor.timer root@$KAMAL_HOSTS:/etc/systemd/system/
+
+
 # Make the script runnable
 ssh root@$KAMAL_HOSTS 'chmod +x /test/file_checker.sh'
+ssh root@$KAMAL_HOSTS 'chmod +x /test/command_executor.sh'
 
 # Start the service or reload the systemctl
 ssh root@$KAMAL_HOSTS 'systemctl daemon-reload'
+
 ssh root@$KAMAL_HOSTS 'systemctl enable file_checker.timer'
 ssh root@$KAMAL_HOSTS 'systemctl start file_checker.timer'
+
+ssh root@$KAMAL_HOSTS 'systemctl enable command_executor.timer'
+ssh root@$KAMAL_HOSTS 'systemctl start command_executor.timer'
+
+echo "THE PRE CONNECT HOOK HAS FINISHED RUNNING"
 
 # Return exit code 0 to prevent kamal from not running the command?
 exit 0
