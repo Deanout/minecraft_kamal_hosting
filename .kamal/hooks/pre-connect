@@ -27,7 +27,6 @@ scp scripts/command_executor/command_executor.sh root@$KAMAL_HOSTS:/test
 scp scripts/command_executor/command_executor.service root@$KAMAL_HOSTS:/etc/systemd/system/
 scp scripts/command_executor/command_executor.timer root@$KAMAL_HOSTS:/etc/systemd/system/
 
-
 # Make the script runnable
 ssh root@$KAMAL_HOSTS 'chmod +x /test/file_checker.sh'
 ssh root@$KAMAL_HOSTS 'chmod +x /test/command_executor.sh'

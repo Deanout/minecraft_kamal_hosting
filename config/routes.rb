@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :games
   resources :commands
 
   # Configure API routes to get the mod's zip file.
